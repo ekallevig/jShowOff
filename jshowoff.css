@@ -78,6 +78,10 @@ a {
 	color: #2D6CBE;
 	}
 
+a:hover {
+	color: #144789;
+	}
+
 h1, h2, h3, h4, h5, h6 {
 	letter-spacing: -.5px;
 	}
@@ -130,6 +134,14 @@ code {
 	color: #2D6CBE;
 	}
 
+span.note, span.note a {
+	color: #aaa;
+	}
+
+span.note a:hover {
+	color: #4f4f4f;
+	}
+
 #options {
 	border: 1px solid #aaa;
 	width: 100%;
@@ -155,10 +167,22 @@ code {
 	margin: 40px 0 0;
 	}
 
-#download {
+#action p {
 	text-align: center;
+	padding: 0 70px;
+	}
+
+#action p.note, #action p.note a {
+	color: #7592b5;
+	}
+
+#action p.note a:hover {
+	color: #2D6CBE;
+	}
+
+#download {
 	padding: 0 0 10px;
-	margin: 0 0 .4em;
+	margin: 0 0 1.6em;
 	line-height: 40px;
 	}
 
@@ -184,19 +208,24 @@ code {
 	border-color: #153f75;
 	}
 
+#donate {
+	background: #f2f7fc;
+	margin: 25px 30px 0;
+	padding: 15px 40px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	}
+	
+#donate p {
+	padding: 0;
+	margin: 0;
+	}
+
 #donate form {
 	text-align: center;
+	margin: 10px 0 0;
 	}
 
-#license, #version {
-	margin-top: 15px;
-	text-align: center;
-	padding: 0 60px;
-	}
-
-#version {
-	margin: 0 0 1.6em;
-	}
 
 
 /*-- jShowOff module styles --*/
