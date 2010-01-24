@@ -1,13 +1,7 @@
-Title: jShowOff: a jQuery Content Rotator Plugin
-
-Author: Erik Kallevig
-
-Version: 0.1.0
-
-Download: jquery.jshowoff.bundle.zip
-
-Website: http://ekallevig.com/jshowoff
-
+Title: jShowOff: a jQuery Content Rotator Plugin  
+Author: Erik Kallevig  
+Version: 0.1.0  
+Website: http://ekallevig.com/jshowoff  
 Licence: Dual licensed under the MIT and GPL licenses.
 
 # jShowOff: a jQuery Content Rotator
@@ -39,13 +33,44 @@ jShowOff currently has a few options for customization, hopefully more in the fu
 
     $('#features').jshowoff({ speed:1500, links: false }); });
 
-| Property    | Type    | Default | Description                                                        |
-| ----------- | ------- | ------- | ------------------------------------------------------------------ |
-| speed       | integer | 3000    | Time each slide is shown in milliseconds.                          |
-| changeSpeed | integer | 600     | Speed of transition in milliseconds.                               |
-| controls    | boolean | true    | Whether to create & display controls (Previous, Next, Play/Pause). |
-| links       | boolean | true    | Whether to create & display numeric links to each slide.           |
-| autoPlay    | boolean | true    | Whether to start playing immediately.                              |
+<table id="options" cellpadding="0" cellspacing="0">
+	<tr>
+		<th>Property</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>speed</td>
+		<td>integer</td>
+		<td>3000</td>
+		<td>Time each slide is shown in milliseconds.</td>
+	</tr>
+	<tr>
+		<td>changeSpeed</td>
+		<td>integer</td>
+		<td>600</td>
+		<td>Speed of transition in milliseconds.</td>
+	</tr>
+	<tr>
+		<td>controls</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to create & display controls (Previous, Next, Play/Pause).</td>
+	</tr>
+	<tr>
+		<td>links</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to create & display numeric links to each slide.</td>
+	</tr>
+	<tr>
+		<td>autoPlay</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to start playing immediately.</td>
+	</tr>
+</table>
 
 ## Future Features
 

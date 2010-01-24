@@ -3,7 +3,6 @@
 Title:		jShowOff: a jQuery Content Rotator Plugin
 Author:		Erik Kallevig
 Version:	0.1.0
-Download:	jquery.jshowoff.bundle.zip
 Website:	http://ekallevig.com/jshowoff
 Licence: 	Dual licensed under the MIT and GPL licenses.
 
