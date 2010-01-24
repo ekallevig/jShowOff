@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head profile="http://gmpg.org/xfn/11">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>jShowOff: a jQuery Content Rotator Plugin</title>
+	
+	<meta name="description" content="jShowOff: a jQuery Content Rotator" />
+	<meta name="keywords" content="jShowOff, jQuery, content rotator, feature rotator, free, plugin, erik, kallevig, erik kallevig" />
+	
+	<link rel="stylesheet" href="./jshowoff.css" type="text/css" media="screen, projection" />
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> 
+	<script type="text/javascript" src="./jquery.jshowoff.min.js"></script>
+
+</head>
+
+
+<body id="home">
+
+<!--
+
+<p>Title:		jShowOff: a jQuery Content Rotator Plugin</p>
+<p>Author:		Erik Kallevig</p>
+<p>Version:		0.1.0</p>
+<p>Download:	jquery.jshowoff.bundle.zip</p>
+<p>Website:		http://ekallevig.com/jshowoff</p>
+<p>Licence: 	Dual licensed under the MIT and GPL licenses.</p>
+
+-->
+
+<div id="wrap">
+
+		<div id="demo">
+
+			<div id="features">
+				<div><a href="http://google.com"><img src="http://imgur.com/qcRee.jpg" alt="Shore" /></a></div>
+				<div><img src="http://imgur.com/cW5CU.jpg" alt="Eddie" id="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
+				<div><a href="http://imgur.com"><img src="http://imgur.com/00f2M.jpg" alt="Flower" /></a></div>
+				<div><a href="http://gmail.com"><img src="http://imgur.com/yjEuQ.jpg" alt="Fern" /></a></div>
+			</div>
+			<script type="text/javascript">		
+				$(document).ready(function(){ $('#features').jshowoff(); });
+			</script>
+			
+			
+			<div id="action">
+				<p id="download"><a href="http://ekallevig.com/jshowoff/jquery.jshowoff.bundle.zip">Download jShowOff Bundle</a></p>
+				<p id="version">Current Version: 0.1.0</p>
+				<p id="license">jShowOff is free for personal and commercial use under the <a href="http://jquery.org/license">MIT/GPL license</a> used by the jQuery core libraries.  Donations are appreciated, but not required.</p>
+				<div id="donate">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+					" />
+					<input type="image" src="http://imgur.com/2en8o.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+					<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+					</form>
+				</div><!--end #donate-->
+			</div><!--end #action-->
+		
+		</div><!--end #demo-->
+
+
+		<div id="about">
+		
+		<h1>jShowOff: a jQuery Content Rotator</h1>
+		<p>jShowOff is a jQuery plugin for creating a rotating content module. It works by creating 'slides' from all the child <code>&lt;div&gt;</code>'s inside a specified wrapper <code>&lt;div&gt;</code> (on which the call to <code>.jshowoff()</code> is invoked) and rotating through them, with options for controls, links, and more.  This type of module is often used to promote pages, sections, or features on a site.</p>
+		
+		<h2>Required Files</h2>
+		<ol>
+			<li><a href="http://jquery.com">the jQuery Core JavaScript Library (1.3+)</a></li>
+			<li><a href="http://ekallevig.com/jshowoff/jquery.jshowoff.min.js">jquery.jshowoff.min.js</a></li>
+		</ol>
+		<p>To get jShowOff up and running, simply include the above files on your page, create the required slides markup and invoke the method (example below).  You can use the default skin (<a href="http://ekallevig.com/jshowoff/jshowoff.css">jshowoff.css</a>) from the demo, or restyle the elements to your liking.</p> 
+		
+		<h2>How to Use</h2>
+		<p>The required markup for jShowOff is a parent <code>&lt;div&gt;</code> with one or more child <code>&lt;div&gt;</code>'s, which will be used as the 'slides'. The following is a basic example:</p>
+		<pre>
+&lt;div id="features"&gt;
+	&lt;div&gt;&lt;p&gt;This is a slide!&lt;/p&gt;&lt;/div&gt;
+	&lt;div&gt;&lt;a href="http://google.com"&gt;&lt;img src="http://www.google.com/intl/en_ALL/images/logo.gif" alt="Google Logo" /&gt;&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;		
+	$(document).ready(function(){ $('#features').jshowoff(); });
+&lt;/script&gt;</pre>
+
+		<h2>Options</h2>
+		<p>jShowOff currently has a few options for customization, hopefully more in the future.  Pass these settings as an object to the <code>.jshowoff()</code> method like this:</p>
+		<pre>$('#features').jshowoff({ speed:1500, links: false }); });</pre>		
+		
+		<table id="options" cellpadding="0" cellspacing="0">
+			<tr>
+				<th>Property</th>
+				<th>Type</th>
+				<th>Default</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>speed</td>
+				<td>integer</td>
+				<td>3000</td>
+				<td>Time each slide is shown in milliseconds.</td>
+			</tr>
+			<tr>
+				<td>changeSpeed</td>
+				<td>integer</td>
+				<td>600</td>
+				<td>Speed of transition in milliseconds.</td>
+			</tr>
+			<tr>
+				<td>controls</td>
+				<td>boolean</td>
+				<td>true</td>
+				<td>Whether to create & display controls (Previous, Next, Play/Pause).</td>
+			</tr>
+			<tr>
+				<td>links</td>
+				<td>boolean</td>
+				<td>true</td>
+				<td>Whether to create & display numeric links to each slide.</td>
+			</tr>
+			<tr>
+				<td>autoPlay</td>
+				<td>boolean</td>
+				<td>true</td>
+				<td>Whether to start playing immediately.</td>
+			</tr>
+		</table>
+
+		<h2>Future Features</h2>
+		<ul>
+			<li>Multiple instances per page.</li>
+			<li>Slide captions.</li>
+		</ul>
+
+		<h2>License</h2>
+		<p>jShowOff is free for personal and commercial use under the <a href="http://jquery.org/license">MIT/GPL license</a> used by the jQuery core libraries.  Donations are appreciated, but not required (see 'Donate' button on the right). </p>
+		
+		<h2>Author</h2>
+		<p>This plugin was written by <a href="http://ekallevig.com/about">Erik Kallevig</a>.</p>
+		
+		</div><!--end #about-->
+		
+</div><!--end #wrap-->
+
+
+
+</body>
+</html>
