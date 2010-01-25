@@ -134,7 +134,7 @@ autoPlay : 		whether to start playing immediately [boolean, defaults to true]
 			function preload() {
 				$(gallery).each(function(i){
 					$(this).find('img').each(function(i){
-						preloaded[i] = $('<img>').attr('src',$(this).attr('src'));
+						preloaded[i] = $('<img>').attr('src',$(this).attr('src'));					
 					});
 				});
 			};
