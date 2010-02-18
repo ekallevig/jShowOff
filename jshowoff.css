@@ -2,7 +2,7 @@
 
 Title:		jShowOff: a jQuery Content Rotator Plugin
 Author:		Erik Kallevig
-Version:	0.1.0
+Version:	0.1.1
 Website:	http://ekallevig.com/jshowoff
 License: 	Dual licensed under the MIT and GPL licenses.
 
@@ -242,20 +242,20 @@ span.note a:hover {
 	-moz-border-radius-topleft: 6px;
 	-moz-border-radius-topright: 6px;
 	}
-#jshowoff {
+.jshowoff {
 	width: 500px;
 	height: 250px;
 	}
-#jshowoff div, #jshowoff img, #jshowoff {
+.jshowoff div, .jshowoff img, .jshowoff {
 	-webkit-border-top-left-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
 	}
-#jshowoff h2, #jshowoff p {
+.jshowoff h2, .jshowoff p {
 	font-size: 18px;
 	padding: 15px 20px 0px;
 	margin: 0;
 	}
-#jshowoff p {
+.jshowoff p {
 	font-size: 13px;
 	line-height: 15px;
 	}
@@ -263,14 +263,14 @@ span.note a:hover {
 	float: right;
 	padding: 15px 20px 15px 20px;
 	}
-#jshowoff-slidelinks {
+.jshowoff-slidelinks {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
 	margin: 0;
 	padding: 0;
 	}
-#jshowoff-slidelinks a, #jshowoff-controls a {
+.jshowoff-slidelinks a, .jshowoff-controls a {
 	display: block;
 	background: #000;
 	color: #fff;
@@ -284,11 +284,11 @@ span.note a:hover {
 	font-size: 11px;
 	line-height: 14px;
 	}
-#jshowoff-slidelinks a.jshowoff-active {
+.jshowoff-slidelinks a.jshowoff-active {
 	background: #fff;
 	color: #000;
 	}
-p#jshowoff-controls {
+p.jshowoff-controls {
 	background: #aaa;
 	overflow: auto;
 	height: 1%;
@@ -299,7 +299,7 @@ p#jshowoff-controls {
 	-webkit-border-bottom-left-radius: 6px;
 	-webkit-border-bottom-right-radius: 6px;
 	}
-#jshowoff-controls a {
+.jshowoff-controls a {
 	margin: 5px 5px 0 0;
 	font-size: 12px;
 	line-height: 15px;

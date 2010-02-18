@@ -1,6 +1,6 @@
 Title: jShowOff: a jQuery Content Rotator Plugin  
 Author: [Erik Kallevig][5]  
-Version: 0.1.0  
+Version: 0.1.1 
 Website: [http://ekallevig.com/jshowoff][6]  
 License: Dual licensed under the MIT and GPL licenses.
 
@@ -70,16 +70,39 @@ jShowOff currently has a few options for customization, hopefully more in the fu
 		<td>true</td>
 		<td>Whether to start playing immediately.</td>
 	</tr>
+	<tr>
+		<td>cssClass</td>
+		<td>string</td>
+		<td>true</td>
+		<td>Add an additional custom class to the .jshowoff wrapper.</td>
+	</tr>
 </table>
 
 ## Future Features
 
-*   Multiple instances per page.
+*   Option to turn off 'Pause' animation.
+*   Allow use of any element for slides, not just &lt;div&gt;'s.
+*   Option to use 'slide' animation instead of 'fade'.
+*   Option to show slides randomly.
+*   Option to pause on hover.
 *   Slide captions.
-
+			
 ## Download
 
 Source files are maintained at [github.com/ekallevig/jShowOff][7]. To quickly grab the bundled demo files, click the 'Download' button on the right.
+
+## Change Log
+
+0.1.1
+
+*   Added error check for changeSpeed set less than speed.
+*   Added 'cssClass' option to specify additional class on .jshowoff wrapper.
+*   Now possible to invoke multiple instances, each with unique classes (for container, controls and links).
+
+
+0.1.0
+
+*   Initial release.
 
 ## License
 
