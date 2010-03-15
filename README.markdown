@@ -1,6 +1,6 @@
 Title: jShowOff: a jQuery Content Rotator Plugin  
 Author: [Erik Kallevig][5]  
-Version: 0.1.2 
+Version: 0.1.2  
 Website: [http://ekallevig.com/jshowoff][6]  
 License: Dual licensed under the MIT and GPL licenses.
 
@@ -13,7 +13,7 @@ jShowOff is a jQuery plugin for creating a rotating content module. It works by 
 1.  [the jQuery Core JavaScript Library (1.3+)][1]
 2.  [jquery.jshowoff.min.js][2]
 
-To get jShowOff up and running, simply include the above files on your page, create the required slides markup and invoke the method (example below). You can use the default skin ([jshowoff.css][3]) from the demo, or restyle the elements to your liking. NOTE: Source files are maintained at [github.com/ekallevig/jShowOff][7].
+To get jShowOff up and running, simply include the above files on your page, create the required slides markup and invoke the method (example below). You can use the default skin ([jshowoff.css][3]) from the demo, or restyle the elements to your liking.
 
 ## How to Use
 
@@ -147,4 +147,3 @@ This plugin was written by [Erik Kallevig][5].
  [4]: http://jquery.org/license
  [5]: http://ekallevig.com/about
  [6]: http://ekallevig.com/jshowoff
- [7]: http://github.com/ekallevig/jShowOff
