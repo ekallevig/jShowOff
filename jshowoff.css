@@ -2,7 +2,7 @@
 
 Title:		jShowOff: a jQuery Content Rotator Plugin
 Author:		Erik Kallevig
-Version:	0.1.1
+Version:	0.1.2
 Website:	http://ekallevig.com/jshowoff
 License: 	Dual licensed under the MIT and GPL licenses.
 
@@ -63,7 +63,7 @@ body {
 
 #demo, #about {
 	width: 500px;
-	float: right;
+	float: left;
 	}
 
 #demo {
@@ -71,7 +71,8 @@ body {
 	}
 
 #about {
-	padding: 0 45px 0 0;
+	padding: 0 50px 0 0;
+	_padding: 0 48px 0 0;
 	}
 
 a {
@@ -108,31 +109,43 @@ ul, ol {
 
 ul li {
 	list-style: disc;
-	margin: 0 0 .4em 1.4em;
+	margin: 0 0 .8em 1.4em;
 	}
 
 ol li {
 	list-style: decimal;
-	margin: 0 0 .4em 2em;
+	margin: 0 0 .4em 1.8em;
 	}
 
+code, samp, kbd {
+	font-family: monospace, sans-serif;
+	text-align: left;
+	color: #2D6CBE;
+	}
+pre code {
+	line-height: 1.6em;
+	font-size: 13px;
+	}
 pre {
-	font-family: monospace;
-	font-size: 1.5em;
-	color: #2D6CBE;
-	overflow: scroll;
-	padding: 10px;
-	border: 1px solid #aaa;
 	background: #efefef;
-	margin: .6em 0 1.2em;
-	_width: 480px;
+	padding: 0.5em 5px 0.5em 10px;
+	border: 1px solid #aaa;
+	margin: 1.7em 0 1.7em 0;
+	overflow: auto;
+	width: 484px;
+	}
+/* target IE7 and IE6 */
+*:first-child+html pre {
+	overflow-y: hidden;
+	overflow: visible;
+	overflow-x: auto; 
+	}
+* html pre {
+	overflow: visible;
+	overflow-x: auto;
+	width: 480px;
 	}
 
-code {
-	font-family: monospace;
-	font-size: 1.3em;
-	color: #2D6CBE;
-	}
 
 span.note, span.note a {
 	color: #aaa;
@@ -145,7 +158,7 @@ span.note a:hover {
 #options {
 	border: 1px solid #aaa;
 	width: 100%;
-	margin: 0 0 0 1px;
+	margin: 0 0 10px 1px;
 	}
 
 #options td, #options th {
@@ -214,6 +227,7 @@ span.note a:hover {
 	padding: 15px 40px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
+	border-radius;
 	}
 	
 #donate p {
@@ -234,9 +248,9 @@ span.note a:hover {
 #features {
 	background: #efefef;
 	position: relative;
-	margin: 10px 0;
 	overflow: hidden;
 	width: 500px;
+	height: 250px;
 	-webkit-border-top-left-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
 	-moz-border-radius-topleft: 6px;
@@ -244,11 +258,18 @@ span.note a:hover {
 	}
 .jshowoff {
 	width: 500px;
+	margin: 10px 0;
+	}
+.jshowoff div {	
+	width: 500px;
 	height: 250px;
 	}
 .jshowoff div, .jshowoff img, .jshowoff {
 	-webkit-border-top-left-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
+	}
+.jshowoff div p, .jshowoff div h2 {
+	_background-color: #efefef;
 	}
 .jshowoff h2, .jshowoff p {
 	font-size: 18px;
@@ -263,7 +284,7 @@ span.note a:hover {
 	float: right;
 	padding: 15px 20px 15px 20px;
 	}
-.jshowoff-slidelinks {
+.jshowoff p.jshowoff-slidelinks {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
@@ -284,7 +305,10 @@ span.note a:hover {
 	font-size: 11px;
 	line-height: 14px;
 	}
-.jshowoff-slidelinks a.jshowoff-active {
+.jshowoff-slidelinks a:hover, .jshowoff-controls a:hover {
+	color: #fff;
+	}
+.jshowoff-slidelinks a.jshowoff-active, .jshowoff-slidelinks a.jshowoff-active:hover {
 	background: #fff;
 	color: #000;
 	}
@@ -304,4 +328,8 @@ p.jshowoff-controls {
 	font-size: 12px;
 	line-height: 15px;
 	padding: 4px 8px 5px;
+	}
+
+.jshowoff-pausetext {
+	color: #fff;
 	}

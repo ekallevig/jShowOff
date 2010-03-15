@@ -1,12 +1,12 @@
 Title: jShowOff: a jQuery Content Rotator Plugin  
 Author: [Erik Kallevig][5]  
-Version: 0.1.1 
+Version: 0.1.2 
 Website: [http://ekallevig.com/jshowoff][6]  
 License: Dual licensed under the MIT and GPL licenses.
 
 # jShowOff: a jQuery Content Rotator Plugin
 
-jShowOff is a jQuery plugin for creating a rotating content module. It works by creating 'slides' from all the child `<div>`'s inside a specified wrapper `<div>` (on which the call to `.jshowoff()` is invoked) and rotating through them, with options for controls, links, and more. This type of module is often used to promote pages, sections, or features on a site.
+jShowOff is a jQuery plugin for creating a rotating content module. It works by creating 'slides' from the child elements (eg. `<li>`) inside a specified wrapper element (eg. `<ul>`) on which `.jshowoff()` is invoked. It then rotates through the slides, with options for controls, links, and more.  This type of module is often used to promote pages, sections, or features on a site.
 
 ## Required Files
 
@@ -17,7 +17,7 @@ To get jShowOff up and running, simply include the above files on your page, cre
 
 ## How to Use
 
-The required markup for jShowOff is a parent `<div>` with one or more child `<div>`'s, which will be used as the 'slides'. The following is a basic example:
+The required markup for jShowOff is a parent element with one or more child elements, which are used as the 'slides'. The following is a basic example:
 
     <div id="features">
     	<div><p>This is a slide!</p></div>
@@ -29,11 +29,15 @@ The required markup for jShowOff is a parent `<div>` with one or more child `<di
 
 ## Options
 
-jShowOff currently has a few options for customization, hopefully more in the future. Pass these settings as an object to the `.jshowoff()` method like this:
+jShowOff has several options for customization.  Pass these settings as an object to the `.jshowoff()` method like this:
 
     $('#features').jshowoff({ speed:1500, links: false }); });
 
 <table id="options" cellpadding="0" cellspacing="0">
+	<col />
+	<col />
+	<col width="120" />
+	<col />
 	<tr>
 		<th>Property</th>
 		<th>Type</th>
@@ -41,10 +45,16 @@ jShowOff currently has a few options for customization, hopefully more in the fu
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>speed</td>
-		<td>integer</td>
-		<td>3000</td>
-		<td>Time each slide is shown in milliseconds.</td>
+		<td>animatePause</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to use 'Pause' animation text when pausing.</td>
+	</tr>
+	<tr>
+		<td>autoPlay</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to start playing immediately.</td>
 	</tr>
 	<tr>
 		<td>changeSpeed</td>
@@ -56,7 +66,31 @@ jShowOff currently has a few options for customization, hopefully more in the fu
 		<td>controls</td>
 		<td>boolean</td>
 		<td>true</td>
-		<td>Whether to create & display controls (Previous, Next, Play/Pause).</td>
+		<td>Whether to create & display controls (Play/Pause, Previous, Next).</td>
+	</tr>
+	<tr>
+		<td>controlText</td>
+		<td>object</td>
+		<td>{ play:'Play', pause:'Pause', previous:'Previous', next:'Next' }</td>
+		<td>Text to use for controls (Play/Pause, Previous, Next). For multi-language support, etc.</td>
+	</tr>
+	<tr>
+		<td>cssClass</td>
+		<td>string</td>
+		<td>true</td>
+		<td>Add an additional custom class to the .jshowoff wrapper.</td>
+	</tr>
+	<tr>
+		<td>effect</td>
+		<td>string</td>
+		<td>'fade'</td>
+		<td>Type of transition effect: 'fade', 'slideLeft' or 'none'.</td>
+	</tr>
+	<tr>
+		<td>hoverPause</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>Whether to pause on hover.</td>
 	</tr>
 	<tr>
 		<td>links</td>
@@ -65,40 +99,35 @@ jShowOff currently has a few options for customization, hopefully more in the fu
 		<td>Whether to create & display numeric links to each slide.</td>
 	</tr>
 	<tr>
-		<td>autoPlay</td>
-		<td>boolean</td>
-		<td>true</td>
-		<td>Whether to start playing immediately.</td>
-	</tr>
-	<tr>
-		<td>cssClass</td>
-		<td>string</td>
-		<td>true</td>
-		<td>Add an additional custom class to the .jshowoff wrapper.</td>
+		<td>speed</td>
+		<td>integer</td>
+		<td>3000</td>
+		<td>Time each slide is shown in milliseconds.</td>
 	</tr>
 </table>
 
+Additionally, the value of the `title` attribute on the 'slide' elements will be inserted as the text for the corresponding 'slide link' in lieu of the default numeric value.
+
 ## Future Features
 
-*   Option to turn off 'Pause' animation.
-*   Allow use of any element for slides, not just &lt;div&gt;'s.
-*   Option to use 'slide' animation instead of 'fade'.
 *   Option to show slides randomly.
-*   Option to pause on hover.
-*   Slide captions.
-			
-## Download
-
-Source files are maintained at [github.com/ekallevig/jShowOff][7]. To quickly grab the bundled demo files, click the 'Download' button on the right.
 
 ## Change Log
 
+0.1.2
+
+*   Added `effect` option, to customize transitions. Options currently include: `fade`, `slideLeft` or `none`.  Slide effect uses new global jQuery mini-plugin, `$.slideIt()`, which can be used on separately on any element.
+*   `$.jshowoff()` can now be invoked on any element and can take any child element as a 'slide'. Previously, only allowed `<div>`'s.
+*   Added ability to customize slide link text via slide element's `title` attribute.
+*   Added `controlText` parameter to allow custom text for controls (multi-language support, etc).
+*   Added the `animatePause` option to specify whether to show the pause animation when pausing.
+*   Changed a lot of dynamic markup and classes, skin CSS, and internal functions, so beware when upgrading. The plugin is still young, so it's subject to substantial change.
+
 0.1.1
 
-*   Added error check for changeSpeed set less than speed.
-*   Added 'cssClass' option to specify additional class on .jshowoff wrapper.
+*   Added error check for `changeSpeed` set less than `speed`.
+*   Added `cssClass` option to specify additional class on .jshowoff wrapper.
 *   Now possible to invoke multiple instances, each with unique classes (for container, controls and links).
-
 
 0.1.0
 
@@ -106,7 +135,7 @@ Source files are maintained at [github.com/ekallevig/jShowOff][7]. To quickly gr
 
 ## License
 
-jShowOff is free for personal and commercial use under the [MIT/GPL license][4] used by the jQuery core libraries. Donations are appreciated, but not required (see 'Donate' button on the right). 
+jShowOff is free for personal and commercial use under the [MIT/GPL license][4] used by the jQuery core libraries. Donations are appreciated, but not required. 
 
 ## Author
 

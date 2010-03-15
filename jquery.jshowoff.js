@@ -2,18 +2,22 @@
 
 Title:		jShowOff: a jQuery Content Rotator Plugin
 Author:		Erik Kallevig
-Version:	0.1.1
+Version:	0.1.2
 Website:	http://ekallevig.com/jshowoff
 License: 	Dual licensed under the MIT and GPL licenses.
 
 jShowOff Options
 
-speed : 		time each slide is shown [integer, milliseconds, defaults to 3000]
-changeSpeed : 	speed of transition [integer, milliseconds, defaults to 600]
-controls : 		whether to create & display controls (Previous, Next, Play/Pause) [boolean, defaults to true]
-links : 		whether to create & display numeric links to each slide [boolean, defaults to true]
-autoPlay : 		whether to start playing immediately [boolean, defaults to true]
-cssClass :		custom class to add to .jshowoff wrapper [string]
+animatePause :		whether to use 'Pause' animation text when pausing [boolean, defaults to true]
+autoPlay :			whether to start playing immediately [boolean, defaults to true]
+changeSpeed :		speed of transition [integer, milliseconds, defaults to 600]
+controls :			whether to create & display controls (Play/Pause, Previous, Next) [boolean, defaults to true]
+controlText :		custom text for controls [object, 'play', 'pause', 'previous' and 'next' properties]
+cssClass :			custom class to add to .jshowoff wrapper [string]
+effect :			transition effect [string: 'fade', 'slideLeft' or 'none', defaults to 'fade']
+hoverPause :		whether to pause on hover [boolean, defaults to true]
+links :				whether to create & display numeric links to each slide [boolean, defaults to true]
+speed :				time each slide is shown [integer, milliseconds, defaults to 3000]
 
 */
 
@@ -22,17 +26,26 @@ cssClass :		custom class to add to .jshowoff wrapper [string]
 
 	$.fn.jshowoff = function(settings) {
 
-		// default variable values
+		// default global vars
 		var config = {
-			speed : 3000,
+			animatePause : true,
+			autoPlay : true,
 			changeSpeed : 600,
 			controls : true,
+			controlText : {
+				play :		'Play',
+				pause :		'Pause',
+				next :		'Next',
+				previous :	'Previous'
+			},
+			effect : 'fade',
+			hoverPause : true,
 			links : true,
-			autoPlay : true
+			speed : 3000
 		};
 		
-		// merge default variables with custom variables, modifying 'config'
-		if (settings) $.extend(config, settings);
+		// merge default global variables with custom variables, modifying 'config'
+		if (settings) $.extend(true, config, settings);
 
 		// make sure speed is at least 20ms longer than changeSpeed
 		if (config.speed < (config.changeSpeed+20)) {
@@ -40,108 +53,130 @@ cssClass :		custom class to add to .jshowoff wrapper [string]
 			return this;
 		};
 		
-		// create slideshow for each matching element invoked by jshowoff()
+		// create slideshow for each matching element invoked by .jshowoff()
 		this.each(function(i) {
 			
-			// invoke variables
-			var cont = this;
-			var gallery = $(this).children('div').remove();
+			// declare instance variables
+			var $cont = $(this);
+			var gallery = $(this).children().remove();
 			var timer = '';
 			var counter = 0;
-			var preloaded = [];
+			var preloadedImg = [];
 			var howManyInstances = $('.jshowoff').length+1;
-			var cssClass = config.cssClass !== undefined ? 'jshowoff-custom-'+howManyInstances+' '+config.cssClass : 'jshowoff-'+howManyInstances;
-			var uniqueClass = cssClass.split(' ')[0];
+			var uniqueClass = 'jshowoff-'+howManyInstances;
+			var cssClass = config.cssClass != undefined ? config.cssClass : '';
 			
-			// set up rotator and start playing
-			function start() {
-				
-				// add .jshowoff wrapper inside container
-				$(cont).css('position','relative').append('<div class="jshowoff '+cssClass+'"></div>');
-				
-				// copy slides, then add to wrapper
-				$(gallery[0]).clone().appendTo('.'+uniqueClass);
-				
-				// preload slide images
-				preload();
-				
-				// add controls
-				if(config.controls){ addControls(); if(config.autoPlay==false){ $('.'+uniqueClass+'-play').addClass(uniqueClass+'-paused jshowoff-paused').text('Play'); } }
-				
-				// add links
-				if(config.links){ addLinks(); $('.'+uniqueClass+'-slidelinks a').eq(0).addClass(uniqueClass+'-active jshowoff-active'); }
-				
-				// load slides into hidden 'cache' div
-				$('<div class="'+uniqueClass+'-cache jshowoff-cache"></div>').appendTo(cont);
-				$(gallery).each(function(){$(this).appendTo($('.'+uniqueClass+'-cache')).hide();});
-				
-				// determine autoPlay
-				if(config.autoPlay && gallery.length>1) { timer = setTimeout( function(){play();}, config.speed ); };
-				
-				// display error message if no slides present
-				if(gallery.length<1){ $('.'+uniqueClass).append('<p>For jShowOff to work, the container element must have child divs.</p>'); }
+			
+			// set up wrapper
+			$cont.css('position','relative').wrap('<div class="jshowoff '+uniqueClass+'" />');
+			var $wrap = $('.'+uniqueClass);
+			$wrap.css('position','relative').addClass(cssClass);
+			
+			// add first slide to wrapper
+			$(gallery[0]).clone().appendTo($cont);
+			
+			// preload slide images into memory
+			preloadImg();
+			
+			// add controls
+			if(config.controls){
+				addControls();
+				if(config.autoPlay==false){
+					$('.'+uniqueClass+'-play').addClass(uniqueClass+'-paused jshowoff-paused').text(config.controlText.play);
+				};
 			};
 			
-			// utility for loading 'slides'
+			// add slide links
+			if(config.links){
+				addSlideLinks();
+				$('.'+uniqueClass+'-slidelinks a').eq(0).addClass(uniqueClass+'-active jshowoff-active');
+			};
+			
+			// pause slide rotation on hover
+			if(config.hoverPause){ $cont.hover(
+				function(){ if(isPlaying()) pause('hover'); },
+				function(){ if(isPlaying()) play('hover'); }
+			);};
+			
+			// determine autoPlay
+			if(config.autoPlay && gallery.length>1) {
+				timer = setInterval( function(){ play(); }, config.speed );
+			};
+			
+			// display error message if no slides present
+			if(gallery.length<1){
+				$('.'+uniqueClass).append('<p>For jShowOff to work, the container element must have child elements.</p>');
+			};
+
+			
+			// utility for loading slides
 			function transitionTo(gallery,index) {
-				if((counter >= gallery.length) || (index >= gallery.length)) { counter = 0; }
-				else if((counter < 0) || (index < 0)) { counter = gallery.length-1; }
+				
+				var oldCounter = counter;
+				if((counter >= gallery.length) || (index >= gallery.length)) { counter = 0; var e2b = true; }
+				else if((counter < 0) || (index < 0)) { counter = gallery.length-1; var b2e = true; }
 				else { counter = index; }
-				$(gallery[counter]).clone().appendTo('.'+uniqueClass).hide().fadeIn(config.changeSpeed);
-				if($('.'+uniqueClass+' div').length>1){
-					$('.'+uniqueClass+' div:first').css('position','absolute').fadeOut(config.changeSpeed,function(){$(this).remove();});
+
+
+				if(config.effect=='slideLeft'){
+					var newSlideDir, oldSlideDir;
+					function slideDir(dir) {
+						newSlideDir = dir=='right' ? 'left' : 'right';
+						oldSlideDir = dir=='left' ? 'left' : 'right';					
+					};
+					
+
+					counter >= oldCounter ? slideDir('left') : slideDir('right') ;
+
+					$(gallery[counter]).clone().appendTo($cont).slideIt({direction:newSlideDir,changeSpeed:config.changeSpeed});
+					if($cont.children().length>1){
+						$cont.children().eq(0).css('position','absolute').slideIt({direction:oldSlideDir,showHide:'hide',changeSpeed:config.changeSpeed},function(){$(this).remove();});
+					};
+				} else if (config.effect=='fade') {
+					$(gallery[counter]).clone().appendTo($cont).hide().fadeIn(config.changeSpeed,function(){if($.browser.msie)this.style.removeAttribute('filter');});
+					if($cont.children().length>1){
+						$cont.children().eq(0).css('position','absolute').fadeOut(config.changeSpeed,function(){$(this).remove();});
+					};
+				} else if (config.effect=='none') {
+					$(gallery[counter]).clone().appendTo($cont);
+					if($cont.children().length>1){
+						$cont.children().eq(0).css('position','absolute').remove();
+					};
 				};
 				
 				// update active class on slide link
 				if(config.links){
 					$('.'+uniqueClass+'-active').removeClass(uniqueClass+'-active jshowoff-active');
 					$('.'+uniqueClass+'-slidelinks a').eq(counter).addClass(uniqueClass+'-active jshowoff-active');
-				}
-			};
-			
-			// generate and add play/pause, prev, next controls
-			function addControls() {
-				$(cont).append('<p class="jshowoff-controls '+uniqueClass+'-controls"><a class="jshowoff-play '+uniqueClass+'-play" href="#null">Pause</a> <a class="jshowoff-prev '+uniqueClass+'-prev" href="#null">Previous</a> <a class="jshowoff-next '+uniqueClass+'-next" href="#null">Next</a></p>');
-				$('.'+uniqueClass+'-controls a').each(function(){
-
-						if($(this).hasClass('jshowoff-play')) $(this).click(function(){ updatePlayPause(); return false; } );
-						if($(this).hasClass('jshowoff-prev')) $(this).click(function(){ previous(); return false; });
-						if($(this).hasClass('jshowoff-next')) $(this).click(function(){ next(); return false; });
-	
-				});
-			};
-
-			// modify play/pause button text/event depending on state
-			function updatePlayPause() {
-				if(isPlaying()){ pause(); $('.'+uniqueClass+'-play').text('Play').toggleClass('jshowoff-paused '+uniqueClass+'-paused'); }
-				else { play(); $('.'+uniqueClass+'-play').text('Pause').toggleClass('jshowoff-paused '+uniqueClass+'-paused'); };
+				};
 			};
 			
 			// is the rotator currently in 'play' mode
 			function isPlaying(){
-				if($('.'+uniqueClass+'-play').hasClass('jshowoff-paused')){ return false; }
-				else { return true; };
+				return $('.'+uniqueClass+'-play').hasClass('jshowoff-paused') ? false : true;
 			};
 			
-			// start rotating slides on a specified interval
-			function play() {
+			// start slide rotation on specified interval
+			function play(src) {
 				if(!isBusy()){
 					counter++;
 					transitionTo(gallery,counter);
-					clearTimeout(timer);
-					timer = setTimeout(function(){ play(gallery); },config.speed);
+					if(src=='hover' || !isPlaying()) {
+						timer = setInterval(function(){ play(); },config.speed);
+					}
+					if(!isPlaying()){
+						$('.'+uniqueClass+'-play').text(config.controlText.pause).removeClass('jshowoff-paused '+uniqueClass+'-paused');
+					}
+				};
+			};
+			
+			// stop slide rotation
+			function pause(src) {
+				clearInterval(timer);
+				if(!src || src=='playBtn') $('.'+uniqueClass+'-play').text(config.controlText.play).addClass('jshowoff-paused '+uniqueClass+'-paused');
+				if(config.animatePause && src=='playBtn'){
+					$('<p class="'+uniqueClass+'-pausetext jshowoff-pausetext">'+config.controlText.pause+'</p>').css({ fontSize:'62%', textAlign:'center', position:'absolute', top:'40%', lineHeight:'100%', width:'100%' }).appendTo($wrap).addClass(uniqueClass+'pauseText').animate({ fontSize:'600%', top:'30%', opacity:0 }, {duration:500,complete:function(){$(this).remove();}});
 				}
-			};
-			
-			// stop auto rotation & invoke pause animation
-			function pause() {
-				clearTimeout(timer);
-				$('<p class="'+uniqueClass+'-pausetext">Pause</p>').css({ fontSize:'62%', color:'#fff', textAlign:'center', position:'absolute', top:'40%', lineHeight:'100%', width:'100%' }).appendTo('.'+uniqueClass).animate({ fontSize:'600%', top:'30%', opacity:0 }, {duration:400,complete:function(){$(this).remove();}});
-			};
-			
-			// stop auto rotation
-			function stopit() {
-				clearTimeout(timer);
 			};
 			
 			// load the next slide
@@ -154,41 +189,49 @@ cssClass :		custom class to add to .jshowoff wrapper [string]
 				goToAndPause(counter-1);
 			};
 			
-			
 			// is the rotator in mid-transition
 			function isBusy() {
-				return $('.'+uniqueClass+' div').length>1 ? true : false;
+				return $cont.children().length>1 ? true : false;
 			};
 			
 			// load a specific slide
 			function goToAndPause(index) {
-				$('.'+uniqueClass+' div').stop(true);
-				stopit();
-				$('.'+uniqueClass+'-play').text('Play').addClass('jshowoff-paused '+uniqueClass+'-paused');
+				$cont.children().stop(true,true);
 				if((counter != index) || ((counter == index) && isBusy())){
-					if(isBusy()) $('.'+uniqueClass+' div:first').remove();
+					if(isBusy()) $cont.children().eq(0).remove();
 					transitionTo(gallery,index);
-				}
-			};
-			
-			// generate and add slide links
-			function addLinks() {
-				$(cont).append('<p class="jshowoff-slidelinks '+uniqueClass+'-slidelinks"></p>');
-				$.each(gallery, function(i, val) {
-					$('<a class="jshowoff-slidelink-'+i+' '+uniqueClass+'-slidelink-'+i+'" href="#null">'+(i+1)+'</a>').bind('click', {index:i}, function(e){ goToAndPause(e.data.index); return false; }).appendTo('.'+uniqueClass+'-slidelinks');
-				});
-			};			
+					pause();
+				};
+			};	
 
-			function preload() {
+			// load images into memory
+			function preloadImg() {
 				$(gallery).each(function(i){
 					$(this).find('img').each(function(i){
-						preloaded[i] = $('<img>').attr('src',$(this).attr('src'));					
+						preloadedImg[i] = $('<img>').attr('src',$(this).attr('src'));					
 					});
 				});
 			};
-			
-			start();	
+				
+			// generate and add play/pause, prev, next controls
+			function addControls() {
+				$wrap.append('<p class="jshowoff-controls '+uniqueClass+'-controls"><a class="jshowoff-play '+uniqueClass+'-play" href="#null">'+config.controlText.pause+'</a> <a class="jshowoff-prev '+uniqueClass+'-prev" href="#null">'+config.controlText.previous+'</a> <a class="jshowoff-next '+uniqueClass+'-next" href="#null">'+config.controlText.next+'</a></p>');
+				$('.'+uniqueClass+'-controls a').each(function(){
+						if($(this).hasClass('jshowoff-play')) $(this).click(function(){ isPlaying() ? pause('playBtn') : play(); return false; } );
+						if($(this).hasClass('jshowoff-prev')) $(this).click(function(){ previous(); return false; });
+						if($(this).hasClass('jshowoff-next')) $(this).click(function(){ next(); return false; });
 	
+				});
+			};	
+
+			// generate and add slide links
+			function addSlideLinks() {
+				$wrap.append('<p class="jshowoff-slidelinks '+uniqueClass+'-slidelinks"></p>');
+				$.each(gallery, function(i, val) {
+					var linktext = $(this).attr('title') != '' ? $(this).attr('title') : i+1;
+					$('<a class="jshowoff-slidelink-'+i+' '+uniqueClass+'-slidelink-'+i+'" href="#null">'+linktext+'</a>').bind('click', {index:i}, function(e){ goToAndPause(e.data.index); return false; }).appendTo('.'+uniqueClass+'-slidelinks');
+				});
+			};		
 	
 	
 		// end .each
@@ -197,6 +240,43 @@ cssClass :		custom class to add to .jshowoff wrapper [string]
 		return this;
 
 	// end .jshowoff
+	};
+
+// end closure
+})(jQuery);
+
+
+
+
+(function($) {
+
+	$.fn.slideIt = function(settings,callback) {
+	
+		// default global vars
+		var config = {
+			direction : 'left',
+			showHide : 'show',
+			changeSpeed : 600
+		};
+		
+		// merge default global variables with custom variables, modifying 'config'
+		if (settings) $.extend(config, settings);
+		
+		this.each(function(i) {	
+			$(this).css({left:'auto',right:'auto',top:'auto',bottom:'auto'});
+			var measurement = (config.direction == 'left') || (config.direction == 'right') ? $(this).outerWidth() : $(this).outerHeight();
+			var startStyle = {};
+			startStyle['position'] = $(this).css('position') == 'static' ? 'relative' : $(this).css('position');
+			startStyle[config.direction] = (config.showHide == 'show') ? '-'+measurement+'px' : 0;
+			var endStyle = {};
+			endStyle[config.direction] = config.showHide == 'show' ? 0 : '-'+measurement+'px';
+			$(this).css(startStyle).animate(endStyle,config.changeSpeed,callback);
+		// end .each
+		});
+	
+		return this;
+		
+	// end .slideIt
 	};
 
 // end closure
