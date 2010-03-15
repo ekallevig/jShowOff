@@ -133,14 +133,18 @@
 			</tr>
 		</table>
 		<p>Additionally, the value of the <code>title</code> attribute on the 'slide' elements will be inserted as the text for the corresponding 'slide link' in lieu of the default numeric value.</p>
+		
+		<h2>Support</h2>
+		
+		<p>If you need help or if you've found a bug, please <a href="http://github.com/ekallevig/jShowOff/issues">create an issue on github</a> and I will investigate.</p>
+
+		<h2>Download</h2>
+		<p>Source files are maintained at <a href="http://github.com/ekallevig/jShowOff">github.com/ekallevig/jShowOff</a>. To quickly grab the bundled files, click the 'Download' button on the right.</p>
 
 		<h2>Future Features</h2>
 		<ul>
 			<li>Option to show slides randomly.</li>
 		</ul>
-
-		<h2>Download</h2>
-		<p>Source files are maintained at <a href="http://github.com/ekallevig/jShowOff">github.com/ekallevig/jShowOff</a>. To quickly grab the bundled files, click the 'Download' button on the right.</p>
 		
 		<h2>Change Log</h2>
 		<p>0.1.2</p>
@@ -175,7 +179,7 @@
 
 			<div id="features">
 				<div><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
-				<div><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" id="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
+				<div><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
 				<div><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
 				<div><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
 			</div>
@@ -199,6 +203,53 @@
 					</form>
 				</div><!--end #donate-->
 			</div><!--end #action-->
+
+			<h2>Sliding Demo</h2>
+			<div id="slidingFeatures">
+				<div><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
+				<div><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
+				<div><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
+				<div><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
+			</div>
+			<script type="text/javascript">		
+				$(document).ready(function(){ $('#slidingFeatures').jshowoff({
+					effect: 'slideLeft',
+					hoverPause: false
+				}); });
+			</script>
+
+
+			<h2>Custom Labels Demo</h2>
+			<div id="labelFeatures">
+				<div title="Shore"><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
+				<div title="Dog"><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
+				<div title="Flower"><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
+				<div title="Fern"><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
+			</div>
+			<script type="text/javascript">		
+				$(document).ready(function(){ $('#labelFeatures').jshowoff({ 
+					controlText:{play:'Reproducir',pause:'Pausar',previous:'Anterior',next:'Siguiente'},
+					hoverPause: false 
+				}); });
+			</script>
+
+			<h2>Control-less, Effect-less Demo</h2>
+			<div id="basicFeatures">
+				<div title="Shore"><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
+				<div title="Dog"><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
+				<div title="Flower"><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
+				<div title="Fern"><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
+			</div>
+			<script type="text/javascript">		
+				$(document).ready(function(){ $('#basicFeatures').jshowoff({ 
+					links: false,
+					controls: false,
+					effect: 'none',
+					cssClass: 'basicFeatures',
+					hoverPause: false 
+				}); });
+			</script>
+			
 		
 		</div><!--end #demo-->
 

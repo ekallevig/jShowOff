@@ -176,8 +176,10 @@ span.note a:hover {
 	background: #E5EDF7;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
+	_height: 1%;
+	overflow: auto;
 	padding: 40px 0 25px;
-	margin: 40px 0 0;
+	margin: 40px 0 40px;
 	}
 
 #action p {
@@ -199,7 +201,7 @@ span.note a:hover {
 	line-height: 40px;
 	}
 
-#download a {
+#download a, a.submit {
 	font-size: 1.6em;
 	font-weight: bold;
 	letter-spacing: -1px;
@@ -216,7 +218,12 @@ span.note a:hover {
 	-webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);
 	}
 
-#download a:hover {
+a.submit {
+	background-position: 0 -35px;
+	font-size: 1.2em;
+	padding: 5px 12px;
+	}
+#download a:hover, a.submit:hover {
 	background-color: #1e5398;
 	border-color: #153f75;
 	}
@@ -241,11 +248,67 @@ span.note a:hover {
 	}
 
 
+#emailform {
+	background: #efefef;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	_height: 1%;
+	overflow: auto;
+	margin: 40px 0 0;
+	padding: 0 30px 15px;
+	}
+#emailform label {
+	display: block;
+	font-weight: bold;
+	}
+.email_name, .email_address {
+	width: 205px;
+	float: left;
+	padding: 0 30px 0 0;
+	}
+.email_address {
+	padding-right: 0;
+	}
+.email_name input, .email_address input {
+	border: 1px solid #aaa;
+	float: left;
+	font-size: 1.3em;
+	padding: 5px 5px;
+	width: 193px;
+	}
+.email_message textarea {
+	border: 1px solid #aaa;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 1.3em;
+	padding: 5px 5px;
+	width: 428px;
+	}
+
+.email_submit {
+	margin: 25px 0;
+	_height: 1%;	
+	}
+
+#status.error {
+	background: #ce4141;
+	_height: 1%;
+	overflow: auto;
+	padding: 5px 15px 0;
+	}
+#status.error p, #status.error li {
+	color: #fff;
+	margin-bottom: .4em;
+	}
+
+
+
+
 
 /*-- jShowOff module styles --*/
 
 
-#features {
+#features, #slidingFeatures, #labelFeatures, #basicFeatures {
 	background: #efefef;
 	position: relative;
 	overflow: hidden;
@@ -268,6 +331,10 @@ span.note a:hover {
 	-webkit-border-top-left-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
 	}
+#basicFeatures, .jshowoff.basicFeatures, .jshowoff.basicFeatures img, .jshowoff.basicFeatures div {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	}
 .jshowoff div p, .jshowoff div h2 {
 	_background-color: #efefef;
 	}
@@ -280,7 +347,7 @@ span.note a:hover {
 	font-size: 13px;
 	line-height: 15px;
 	}
-#eddie {
+.eddie {
 	float: right;
 	padding: 15px 20px 15px 20px;
 	}

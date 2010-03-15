@@ -108,6 +108,10 @@ jShowOff has several options for customization.  Pass these settings as an objec
 
 Additionally, the value of the `title` attribute on the 'slide' elements will be inserted as the text for the corresponding 'slide link' in lieu of the default numeric value.
 
+## Support
+
+If you need help or if you've found a bug, please [create an issue][7] and I will investigate.
+
 ## Future Features
 
 *   Option to show slides randomly.
@@ -147,3 +151,4 @@ This plugin was written by [Erik Kallevig][5].
  [4]: http://jquery.org/license
  [5]: http://ekallevig.com/about
  [6]: http://ekallevig.com/jshowoff
+ [7]: http://github.com/ekallevig/jShowOff/issues
