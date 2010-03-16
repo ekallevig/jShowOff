@@ -219,8 +219,9 @@ span.note a:hover {
 	}
 
 a.submit {
-	background-position: 0 -35px;
-	font-size: 1.2em;
+	background-position: 0 -36px;
+	font-size: 1.1em;
+	letter-spacing: 0;
 	padding: 5px 12px;
 	}
 #download a:hover, a.submit:hover {

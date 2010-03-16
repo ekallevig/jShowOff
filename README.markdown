@@ -120,7 +120,8 @@ If you need help or if you've found a bug, please [create an issue][7] and I wil
 
 0.1.2
 
-*   Added `effect` option, to customize transitions. Options currently include: `fade`, `slideLeft` or `none`.  Slide effect uses new global jQuery mini-plugin, `$.slideIt()`, which can be used on separately on any element.
+*   Added `effect` option to customize transitions. Options currently include: `fade`, `slideLeft` or `none`.  Slide effect uses new global jQuery mini-plugin, `$.slideIt()`, which can be used on separately on any element.
+*   Added `hoverPause` option to temporarily stop slide rotation on hover.
 *   `$.jshowoff()` can now be invoked on any element and can take any child element as a 'slide'. Previously, only allowed `<div>`'s.
 *   Added ability to customize slide link text via slide element's `title` attribute.
 *   Added `controlText` parameter to allow custom text for controls (multi-language support, etc).
