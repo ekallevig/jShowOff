@@ -205,32 +205,18 @@
 				</div><!--end #donate-->
 			</div><!--end #action-->
 
-			<h2>Sliding Demo</h2>
+			<h2>Sliding Effect &amp; Custom Labels Demo</h2>
 			<div id="slidingFeatures">
-				<div><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
-				<div><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
-				<div><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
-				<div><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
-			</div>
-			<script type="text/javascript">		
-				$(document).ready(function(){ $('#slidingFeatures').jshowoff({
-					effect: 'slideLeft',
-					hoverPause: false
-				}); });
-			</script>
-
-
-			<h2>Custom Labels Demo</h2>
-			<div id="labelFeatures">
 				<div title="Shore"><a href="http://google.com"><img src="http://farm5.static.flickr.com/4017/4303103738_a4745a3e6d_o.jpg" alt="Shore" /></a></div>
 				<div title="Dog"><img src="http://farm5.static.flickr.com/4062/4302354579_2a16dcb3cd_o.jpg" alt="Eddie" class="eddie" /><h2>HTML Slide</h2><p>Example of an HTML slide.</p><p>Lorem ipsum dolor sit amet, nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p><p><a href="http://reddit.com">Learn More &#8250;</a></p></div>	
 				<div title="Flower"><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4067/4302354517_d72d321f17_o.jpg" alt="Flower" /></a></div>
 				<div title="Fern"><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2739/4303103822_a3b23ff7f5_o.jpg" alt="Fern" /></a></div>
 			</div>
 			<script type="text/javascript">		
-				$(document).ready(function(){ $('#labelFeatures').jshowoff({ 
+				$(document).ready(function(){ $('#slidingFeatures').jshowoff({
+					effect: 'slideLeft',
 					controlText:{play:'Reproducir',pause:'Pausar',previous:'Anterior',next:'Siguiente'},
-					hoverPause: false 
+					hoverPause: false
 				}); });
 			</script>
 
@@ -250,7 +236,20 @@
 					hoverPause: false 
 				}); });
 			</script>
-			
+
+			<h2>Re-styled Thumbnail Demo</h2>
+			<div id="thumbFeatures">
+				<div><a href="http://google.com"><img src="http://farm5.static.flickr.com/4056/4438272805_0abbbbaff2_o_d.jpg" alt="Mountain" /></a></div>
+				<div><a href="http://google.com"><img src="http://farm3.static.flickr.com/2754/4439049486_ec397f1d76_o_d.jpg" alt="Mountain" /></a></div>
+				<div><a href="http://imgur.com"><img src="http://farm5.static.flickr.com/4011/4439049454_d5e54a53f7_o_d.jpg" alt="Mountain" /></a></div>
+				<div><a href="http://gmail.com"><img src="http://farm3.static.flickr.com/2656/4438272741_b26665f2c4_o_d.jpg" alt="Mountain" /></a></div>
+			</div>
+			<script type="text/javascript">		
+				$(document).ready(function(){ $('#thumbFeatures').jshowoff({ 
+					cssClass: 'thumbFeatures',
+					effect: 'slideLeft'
+				}); });
+			</script>
 		
 		</div><!--end #demo-->
 
